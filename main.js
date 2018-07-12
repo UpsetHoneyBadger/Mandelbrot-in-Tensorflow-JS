@@ -67,7 +67,6 @@ function drawMandelBrot(left = -1.5, top = -1.5, right = 1.5, bottom = 1.5, maxI
     console.log(tf.memory())
 }
 
-let startedRect = false
 let x1 = 0
 let x2 = 0
 let y1 = 0
@@ -88,39 +87,15 @@ function setup(){
 function mouseClicked() {
     if(mouseX > width || mouseY > height || mouseX < 0 || mouseY < 0)
         return
-    if(!startedRect){
-        x1 = mouseX
-        y1 = mouseY
-        startedRect = true        
-    } else {
-        x2 = mouseX
-        y2 = mouseY
-        startedRect = false
-
-        let _x_min = map(x1, 0, width, x_min, x_max)
-        let _y_min = map(y1, 0, height, y_min, y_max)
-        let _x_max = map(x2, 0, width, x_min, x_max)
-        let _y_max = map(y2, 0, height, y_min, y_max)
-
-        x_min = _x_min
-        y_min = _y_min
-        x_max = _x_max
-        y_max = _y_max
-
-        drawMandelBrot(x_min, y_min, x_max, y_max, maxIter)
-
-
-
-        console.log(x_max - x_min,  y_max - y_min)
-    }
-}
-
-function mouseMoved(){
-    if(startedRect){
-        x2 = mouseX
-        y2 = mouseY
-        // rect(x1,y1,x2-x1,y2-y1)
-    }
+    const x1 = map(mouseX, 0, width, x_min, x_max)
+    const y1 = map(mouseY, 0, height, y_min, y_max)
+    const currW = x_max - x_min
+    const currH = y_max - y_min
+    x_min = x1 - currW / 4 
+    x_max = x_min + currW / 2
+    y_min = y1 - currH / 4 
+    y_max = y_min + currH / 2
+    drawMandelBrot(x_min, y_min, x_max, y_max, maxIter)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
