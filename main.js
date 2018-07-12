@@ -64,7 +64,7 @@ function drawMandelBrot(left = -1.5, top = -1.5, right = 1.5, bottom = 1.5, maxI
     }
     img.updatePixels();
     image(img, 0, 0)
-    console.log(tf.memory())
+    // console.log(tf.memory())
 }
 
 let x1 = 0
@@ -75,7 +75,7 @@ let x_min = -2.05
 let y_min = -1.3
 let x_max = 0.6
 let y_max = 1.3
-let maxIter = 15
+let maxIter = 23
 
 function setup(){
     let cnv = createCanvas(dimX * scl, dimY * scl)
